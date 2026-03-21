@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cb7j8gjhn24sg"]
+
+[ext_resource type="PackedScene" uid="uid://df0w0w4pn4sup" path="res://playerSeed.tscn" id="1_rl45k"]
+[ext_resource type="Texture2D" uid="uid://dwsun8xsby5dj" path="res://2304x1296.png" id="3_sgbce"]
+[ext_resource type="Script" uid="uid://dk861bubeowax" path="res://camSettings.gd" id="3_x8dfh"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v8q5d"]
+
+[node name="Node2D" type="Node2D" unique_id=1170277277]
+
+[node name="Seed" parent="." unique_id=723714018 instance=ExtResource("1_rl45k")]
+position = Vector2(109, -688)
+launchSpeed = 1000.0
+
+[node name="Launcher" type="Sprite2D" parent="." unique_id=1815340769]
+position = Vector2(95.000015, -558)
+scale = Vector2(174.50002, 84.49999)
+texture = SubResource("PlaceholderTexture2D_v8q5d")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1100160061 node_paths=PackedStringArray("player")]
+script = ExtResource("3_x8dfh")
+player = NodePath("../Seed")
+cameraOffset = Vector2(200, 0)
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=269267586]
+scroll_offset = Vector2(-80, -644)
+repeat_size = Vector2(2304, 0)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D" unique_id=1489006612]
+z_index = -1
+texture = ExtResource("3_sgbce")
