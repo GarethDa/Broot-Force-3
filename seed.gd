@@ -3,10 +3,12 @@ extends CharacterBody2D
 @export var rotationSpeed: float = 1
 @export var launchSpeed: float = 1
 
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var launched = false;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -19,5 +21,11 @@ func _process(delta):
 	rotation += rotationDelta * rotationSpeed
 	
 func _physics_process(delta):
-	velocity = Vector2(launchSpeed, 0)
-	move_and_slide()
+	if (launched):
+		#velocity.x = launchSpeed
+		velocity.y += gravity * delta
+		move_and_slide()
+
+func _on_launcher_seed_launched(direction):
+	launched = true
+	velocity = direction * launchSpeed
