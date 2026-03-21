@@ -29,5 +29,6 @@ func _process(delta):
 				rotation_degrees = minAngle
 				rotatingUp = true
 
-	if (Input.is_action_pressed("select_angle")):
+	if (Input.is_action_just_pressed("select_angle") && !doneLaunching):
 		seedLaunched.emit(global_transform.x)
+		doneLaunching = true

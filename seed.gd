@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 @export var rotationSpeed: float = 1
 @export var launchSpeed: float = 1
@@ -8,6 +8,7 @@ var launched = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	freeze = true
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,11 +22,14 @@ func _process(delta):
 	rotation += rotationDelta * rotationSpeed
 	
 func _physics_process(delta):
-	if (launched):
+	pass
+	#if (launched):
 		#velocity.x = launchSpeed
-		velocity.y += gravity * delta
-		move_and_slide()
+		#velocity.y += gravity * delta
+		#move_and_slide()
 
 func _on_launcher_seed_launched(direction):
 	launched = true
-	velocity = direction * launchSpeed
+	freeze = false
+	apply_impulse(direction * launchSpeed)
+	#velocity = direction * launchSpeed

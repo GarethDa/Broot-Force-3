@@ -7,7 +7,7 @@
 radius = 27.0
 height = 102.0
 
-[node name="Seed" type="CharacterBody2D" unique_id=723714018]
+[node name="Seed" type="RigidBody2D" unique_id=1482095843]
 script = ExtResource("1_gpi80")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=593236146]
