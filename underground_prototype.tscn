@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cop5a454j871f"]
+
+[ext_resource type="Script" uid="uid://cccqlbuykxodl" path="res://Underground/Scripts/root_line.gd" id="1_8ntvm"]
+[ext_resource type="Material" uid="uid://bdr1charjvwqo" path="res://Underground/Materials/TextureInfiniteScroll.tres" id="1_wws2t"]
+[ext_resource type="Texture2D" uid="uid://cykxx6p4pimd1" path="res://Textures/dirt.png" id="2_wi4c4"]
+[ext_resource type="Script" uid="uid://btajyuv4p1qxi" path="res://Underground/Scripts/background_scroll.gd" id="3_qfwt6"]
+[ext_resource type="Script" uid="uid://iuwl8gq21k36" path="res://Underground/Scripts/follow_cursor.gd" id="3_ykle8"]
+
+[node name="Node2D" type="Node2D" unique_id=521060635]
+
+[node name="Origin" type="Node2D" parent="." unique_id=1706371417]
+
+[node name="Player" type="Node2D" parent="." unique_id=2078816303]
+
+[node name="BackgroundScroll" type="Sprite2D" parent="Player" unique_id=49461693]
+texture_repeat = 2
+material = ExtResource("1_wws2t")
+position = Vector2(1.9999981, 36)
+scale = Vector2(12.174999, 8.739999)
+texture = ExtResource("2_wi4c4")
+region_enabled = true
+region_rect = Rect2(0, 0, 100, 100)
+script = ExtResource("3_qfwt6")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1257601282]
+
+[node name="FollowCursor" type="Node2D" parent="Player" unique_id=1662058621]
+script = ExtResource("3_ykle8")
+speed = 200.0
+
+[node name="Line2D" type="Line2D" parent="." unique_id=780668638 node_paths=PackedStringArray("player", "origin")]
+points = PackedVector2Array(-84.9, -117.2, 0, 0)
+script = ExtResource("1_8ntvm")
+player = NodePath("../Player")
+origin = NodePath("../Origin")
+arcLengthToAddPoint = 500.0
+
+[node name="Dirt" type="Sprite2D" parent="." unique_id=381037636]
+visible = false
+position = Vector2(61, -39)
+texture = ExtResource("2_wi4c4")

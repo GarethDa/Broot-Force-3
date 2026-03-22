@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dfxdvgia8bqtw"]
+
+[ext_resource type="Texture2D" uid="uid://cykxx6p4pimd1" path="res://Textures/dirt.png" id="1_ic4vm"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=334665797]
+texture_repeat = 2
+texture = ExtResource("1_ic4vm")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 2000)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1930541355]
+rect = Rect2(1000, 1990, 10, 10)

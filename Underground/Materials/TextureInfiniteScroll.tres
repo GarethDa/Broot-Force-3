@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bdr1charjvwqo"]
+
+[ext_resource type="Shader" uid="uid://wrgfro4emttq" path="res://Underground/Materials/TextureInfiniteScroll.gdshader" id="1_sn70s"]
+[ext_resource type="Texture2D" uid="uid://cykxx6p4pimd1" path="res://Textures/dirt.png" id="2_igmrb"]
+
+[resource]
+shader = ExtResource("1_sn70s")
+shader_parameter/scrollTexture = ExtResource("2_igmrb")
+shader_parameter/texSize = Vector2(512, 512)
+shader_parameter/scale = 1000.0
+shader_parameter/position = Vector2(0, 0)
