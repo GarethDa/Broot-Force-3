@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cb7j8gjhn24sg"]
 
+[ext_resource type="PackedScene" uid="uid://df0w0w4pn4sup" path="res://playerSeed.tscn" id="1_rl45k"]
 [ext_resource type="Script" uid="uid://bm4j4qhw6yvvy" path="res://seedLauncher.gd" id="2_sgbce"]
-[ext_resource type="PackedScene" uid="uid://c5qd34ubjksbs" path="res://seedCB.tscn" id="2_w4tub"]
 [ext_resource type="Texture2D" uid="uid://dwsun8xsby5dj" path="res://2304x1296.png" id="3_sgbce"]
 [ext_resource type="Script" uid="uid://dk861bubeowax" path="res://camSettings.gd" id="3_x8dfh"]
 [ext_resource type="PhysicsMaterial" uid="uid://c00xfo7odl2vj" path="res://PhysicMaterials/PM_basic_ground.tres" id="5_v8q5d"]
@@ -14,18 +14,14 @@ size = Vector2(3072.5, 78)
 
 [node name="Node2D" type="Node2D" unique_id=1170277277]
 
-[node name="SeedCB" parent="." unique_id=1898941564 instance=ExtResource("2_w4tub")]
-position = Vector2(25, -587)
-rotationSpeed = 5.0
-launchSpeed = 500.0
-propellerStrength = 30.0
-gravityScale = 0.5
-airDrag = 5.0
-groundFriction = 10.0
+[node name="Seed" parent="." unique_id=723714018 instance=ExtResource("1_rl45k")]
+position = Vector2(56, -582)
+launchSpeed = 400.0
+propellerStrength = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1100160061 node_paths=PackedStringArray("player")]
 script = ExtResource("3_x8dfh")
-player = NodePath("../SeedCB")
+player = NodePath("../Seed")
 cameraOffset = Vector2(200, 0)
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=269267586]
@@ -60,7 +56,7 @@ shape = SubResource("RectangleShape2D_sgbce")
 [node name="GameManager" type="Node2D" parent="." unique_id=703772600 node_paths=PackedStringArray("floorCollider", "playerSeed", "colliderHolder")]
 script = ExtResource("6_bbq2x")
 floorCollider = NodePath("../StaticBody2D/CollisionShape2D")
-playerSeed = NodePath("../SeedCB")
+playerSeed = NodePath("../Seed")
 colliderHolder = NodePath("../StaticBody2D")
 
-[connection signal="seedLaunched" from="Launcher" to="SeedCB" method="_on_launcher_seed_launched"]
+[connection signal="seedLaunched" from="Launcher" to="Seed" method="_on_launcher_seed_launched"]

@@ -1,11 +1,10 @@
 extends Node2D
 
-@export var seedCharacter: CharacterBody2D
 @export var minAngle = -85
 @export var maxAngle = 85
 @export var rotateSpeed = 100
 
-signal seedLaunched(direction: Vector2)
+signal seedLaunched(roatationDegrees: float)
 
 var rotatingUp = true
 var doneLaunching = false
@@ -30,5 +29,5 @@ func _process(delta):
 				rotatingUp = true
 
 	if (Input.is_action_just_pressed("select_angle") && !doneLaunching):
-		seedLaunched.emit(global_transform.x)
+		seedLaunched.emit(rotation_degrees)
 		doneLaunching = true

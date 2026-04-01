@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c5qd34ubjksbs"]
+
+[ext_resource type="Script" uid="uid://c1hd6fk5lgklw" path="res://seed_cb.gd" id="1_ok1xb"]
+[ext_resource type="Texture2D" uid="uid://dl12dpexgahs2" path="res://icon.svg" id="2_p4lxp"]
+[ext_resource type="Texture2D" uid="uid://l06o7sw6qbli" path="res://propellor.png" id="3_hv1ru"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgbce"]
+radius = 27.0
+height = 102.0
+
+[node name="SeedCB" type="CharacterBody2D" unique_id=1898941564 node_paths=PackedStringArray("rotationTracker")]
+script = ExtResource("1_ok1xb")
+rotationTracker = NodePath("RotationNode")
+
+[node name="SpriteHolder" type="Node2D" parent="." unique_id=1108231310]
+scale = Vector2(0.122093014, 0.066082805)
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteHolder" unique_id=249092178]
+scale = Vector2(6.526787, 6.5022597)
+texture = ExtResource("2_p4lxp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SpriteHolder" unique_id=62359066]
+position = Vector2(-8.190476, -1029.0121)
+scale = Vector2(1.0000001, 1)
+texture = ExtResource("3_hv1ru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1793494742]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_sgbce")
+
+[node name="RotationNode" type="Node2D" parent="." unique_id=1188914902]
