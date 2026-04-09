@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var gravityScale: float = 1
 @export var airDrag: float = 1
 @export var groundFriction: float = 1
+@export var dragPerDegree: float = 1
 #@export var 
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -47,8 +48,13 @@ func _physics_process(delta):
 		
 		if (is_on_floor()):
 			forwardVelocityLength = move_toward(forwardVelocityLength, 0, groundFriction * 1000)
-			
-		forwardVelocityLength = move_toward(forwardVelocityLength, 0, airDrag * 10)
+		
+		var currentDrag = airDrag - (rotationTracker.rotation_degrees * dragPerDegree)
+		
+		if (forwardVelocityLength <= 0 && !is_on_floor()):
+			forwardVelocityLength = 0.1
+		
+		forwardVelocityLength = move_toward(forwardVelocityLength, 0, currentDrag)
 		totalVelocity += forwardVelocityLength * rotationTracker.global_transform.x * delta
 		totalVelocity += get_gravity() * gravityScale
 		
@@ -58,33 +64,16 @@ func _physics_process(delta):
 
 func _on_launcher_seed_launched(rotationDegrees):
 	launched = true
-	var rotationDelta = rotationDegrees - rotationTracker.rotation_degrees
-	for child in get_children():
-			child.global_rotation_degrees += rotationDelta
-			
+	set_full_rotation(rotationDegrees)
+	
 	forwardVelocityLength = launchSpeed * 1000
 	#apply_impulse(roatationTracker.global_transform.x * launchSpeed)
 	#velocity = direction * launchSpeed
 
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-#
-#
-#func _physics_process(delta):
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction = Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()
+func set_full_rotation(rotationDegrees: float):
+	var rotationDelta = rotationDegrees - rotationTracker.rotation_degrees
+	for child in get_children():
+			child.global_rotation_degrees += rotationDelta
+			
+func set_new_forward_speed(newSpeed):
+	forwardVelocityLength = newSpeed

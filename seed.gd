@@ -3,7 +3,7 @@ extends RigidBody2D
 @export var rotationSpeed: float = 1
 @export var launchSpeed: float = 1
 @export var propellerStrength: float = 1
-@export var roatationTracker: Node2D
+@export var rotationTracker: Node2D
 @export var gravityScale: float = 1
 #@export var 
 
@@ -33,17 +33,21 @@ func _physics_process(delta):
 			child.global_rotation += rotationDelta * rotationSpeed
 		
 		if (Input.is_action_pressed("use_propeller")):
-			apply_force(-roatationTracker.global_transform.y * 100 * propellerStrength)
+			apply_force(-rotationTracker.global_transform.y * 100 * propellerStrength)
 
 func _on_launcher_seed_launched(rotationDegrees):
 	launched = true
 	freeze = false
-	var rotationDelta = rotationDegrees - roatationTracker.rotation_degrees
+	var rotationDelta = rotationDegrees - rotationTracker.rotation_degrees
 	for child in get_children():
 			child.global_rotation_degrees += rotationDelta
-	apply_impulse(roatationTracker.global_transform.x * launchSpeed)
-	#velocity = direction * launchSpeed
-	
+	apply_impulse(rotationTracker.global_transform.x * launchSpeed)
+
+func set_full_rotation(rotationDegrees):
+	var rotationDelta = rotationDegrees - rotationTracker.rotation_degrees
+	for child in get_children():
+			child.global_rotation_degrees += rotationDelta
+
 func _calculate_lift():
 	
 	pass

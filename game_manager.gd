@@ -20,3 +20,7 @@ func _process(delta):
 		colliderHolder.add_child(newCollider)
 		floorTileCount += 1
 	pass
+
+
+func _on_seed_holder_player_swapped(focusedPlayed):
+	playerSeed = focusedPlayed

@@ -11,3 +11,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position = player.position + cameraOffset
+
+
+func _on_seed_holder_player_swapped(focusedPlayed):
+	player = focusedPlayed

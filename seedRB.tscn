@@ -8,9 +8,9 @@
 radius = 27.0
 height = 102.0
 
-[node name="SeedRB" type="RigidBody2D" unique_id=1482095843 node_paths=PackedStringArray("roatationTracker")]
+[node name="SeedRB" type="RigidBody2D" unique_id=1482095843 node_paths=PackedStringArray("rotationTracker")]
 script = ExtResource("1_3b10i")
-roatationTracker = NodePath("RotationNode")
+rotationTracker = NodePath("RotationNode")
 
 [node name="SpriteHolder" type="Node2D" parent="." unique_id=140478800]
 scale = Vector2(0.122093014, 0.066082805)

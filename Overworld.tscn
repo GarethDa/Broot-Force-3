@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://cb7j8gjhn24sg"]
 
+[ext_resource type="PackedScene" uid="uid://df0w0w4pn4sup" path="res://seedRB.tscn" id="2_rmrvc"]
 [ext_resource type="Script" uid="uid://bm4j4qhw6yvvy" path="res://seedLauncher.gd" id="2_sgbce"]
 [ext_resource type="PackedScene" uid="uid://c5qd34ubjksbs" path="res://seedCB.tscn" id="2_w4tub"]
 [ext_resource type="Texture2D" uid="uid://dwsun8xsby5dj" path="res://2304x1296.png" id="3_sgbce"]
 [ext_resource type="Script" uid="uid://dk861bubeowax" path="res://camSettings.gd" id="3_x8dfh"]
 [ext_resource type="PhysicsMaterial" uid="uid://c00xfo7odl2vj" path="res://PhysicMaterials/PM_basic_ground.tres" id="5_v8q5d"]
 [ext_resource type="Script" uid="uid://8cowrkype7al" path="res://game_manager.gd" id="6_bbq2x"]
+[ext_resource type="Script" uid="uid://cvwe8ieb0gnf7" path="res://seed_holder.gd" id="7_w4tub"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_v8q5d"]
 
@@ -15,13 +17,20 @@ size = Vector2(3072.5, 78)
 [node name="Node2D" type="Node2D" unique_id=1170277277]
 
 [node name="SeedCB" parent="." unique_id=1898941564 instance=ExtResource("2_w4tub")]
-position = Vector2(25, -587)
-rotationSpeed = 5.0
-launchSpeed = 500.0
+position = Vector2(45, -579)
+rotationSpeed = 15.0
+launchSpeed = 150.0
 propellerStrength = 30.0
-gravityScale = 0.5
-airDrag = 5.0
+gravityScale = 0.2
+airDrag = 30.0
 groundFriction = 10.0
+dragPerDegree = 30.0
+
+[node name="SeedRB" parent="." unique_id=1482095843 instance=ExtResource("2_rmrvc")]
+position = Vector2(-453, -207)
+lock_rotation = true
+launchSpeed = 1000.0
+propellerStrength = 15.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1100160061 node_paths=PackedStringArray("player")]
 script = ExtResource("3_x8dfh")
@@ -63,4 +72,16 @@ floorCollider = NodePath("../StaticBody2D/CollisionShape2D")
 playerSeed = NodePath("../SeedCB")
 colliderHolder = NodePath("../StaticBody2D")
 
+[node name="SeedHolder" type="Node2D" parent="." unique_id=1559304165 node_paths=PackedStringArray("gliderSeedCollider", "propellerSeedCollider")]
+position = Vector2(40, -27)
+script = ExtResource("7_w4tub")
+gliderSeedCollider = NodePath("../SeedCB/CollisionShape2D")
+propellerSeedCollider = NodePath("../SeedRB/CollisionShape2D")
+
 [connection signal="seedLaunched" from="Launcher" to="SeedCB" method="_on_launcher_seed_launched"]
+[connection signal="seedLaunched" from="Launcher" to="SeedRB" method="_on_launcher_seed_launched"]
+[connection signal="playerSwapped" from="SeedHolder" to="Camera2D" method="_on_seed_holder_player_swapped"]
+[connection signal="playerSwapped" from="SeedHolder" to="GameManager" method="_on_seed_holder_player_swapped"]
+
+[editable path="SeedCB"]
+[editable path="SeedRB"]
